@@ -3,7 +3,7 @@ import "../sharesItem/styles.css";
 
 interface SharesItem {
   title: string;
-  value: string;
+  value?: string;
 }
 
 const SharesItem: FC<SharesItem> = ({ title, value }) => {

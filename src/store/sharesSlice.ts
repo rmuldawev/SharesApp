@@ -9,11 +9,24 @@ const baseService = axios.create({
 
   export const getShares = createAsyncThunk('ShareSlice/getShares', async () => {
     const response = await baseService.get(`stock/aapl/quote?token=${token}`);
-    return response.data;
+    const data = Object.entries(response.data)
+
+    const values = data.filter(
+      (e) => e.length > 0 && e[1] !== null && e[1] !== false
+    );
+  
+    const arrayOfObjects = values.map(function (subArray) {
+      return {
+        name: subArray[0],
+        value: subArray[1],
+      };
+    });
+    console.log('response',arrayOfObjects)
+    return arrayOfObjects;
   });
 
   interface ShareSliceState {
-    items: any[];
+    items:  [] | any;
     status: string;
     error: string | null;
   }
