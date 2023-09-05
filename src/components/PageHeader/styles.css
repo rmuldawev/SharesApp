@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+}
+
+
+.headerContainer {
+    /* background-color: red; */
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.titleCompany {
+  display: flex;
+  flex-direction: row;
+  /* background-color: aqua; */
+  /* padding: 20px 20px 20px 20px; */
+}
+
+.nasdaq {
+    font-size: .95rem;
+    font-weight: 400;
+}
+
+.nasdaqBox {
+  display: flex;
+  flex-direction: row;
+  /* background-color: mediumorchid; */
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+
+.containerBox {
+    border: 1px solid lightgrey;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0;
+}
+
+.headerBox {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    height: 500px;
+    /* background-color: lightgray; */
+    padding: 20px 20px;
+    gap: 50px;
+}
+
+.nameCompany {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: rgb(35 37 38/var(--tw-text-opacity));
+  font-size: 1.95rem;
+}
+
+.changeBox {
+  /* background-color: greenyellow; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.changesContainer {
+    /* background-color: antiquewhite; */
+    display: flex;
+    flex-direction: row;
+    max-width: 400px;
+    /* justify-content: space-between; */
+    gap: 20px;
+    align-items: center;
+
+}
+
+.latestPrice {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+}
+
+.change {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+}
+
+.arrow {
+    height: 2px;
+    width: 100%;
+    background-color: black;
+}
+.avgTotal {
+    font-weight: 700;
+}
+
+.oneYear {
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+
+}
+
+.oneDay_oneYear {
+    /* background-color: green; */
+    width: 500px;
+}
+
+.peRatio{
+    /* background-color:darkkhaki; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

@@ -12,7 +12,8 @@ const baseService = axios.create({
     const data = Object.entries(response.data)
 
     const values = data.filter(
-      (e) => e.length > 0 && e[1] !== null && e[1] !== false
+      (e) => e.length > 0 && e[1] !== null 
+      && e[1] !== 0
     );
   
     const arrayOfObjects = values.map(function (subArray) {
@@ -21,14 +22,14 @@ const baseService = axios.create({
         value: subArray[1],
       };
     });
-    console.log('response',arrayOfObjects)
     return arrayOfObjects;
+    // return data
   });
 
   interface ShareSliceState {
     items:  [] | any;
     status: string;
-    error: string | null;
+    error: any | null;
   }
 
   const initialState: ShareSliceState = {
@@ -50,15 +51,13 @@ export const dataSlice = createSlice({
         state.status = 'succeeded'; 
         state.items = action.payload;
       })
-      // .addCase(getShares.rejected, (state, action) => {
-      //   state.status = 'failed'; // Устанавливаем статус ошибки
-      //   state.error = action.error.message;
-      // });
+      .addCase(getShares.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      });
   },
 });
 
 export default dataSlice.reducer;
 
 export const selectData = (state: RootState) => state.data.items
-// export const selectShares = (state:RootState) => state.data.items
-// export const selectShares = (state:RootState) => state.data.items;

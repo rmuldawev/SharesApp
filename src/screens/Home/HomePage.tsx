@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getShares, selectData } from "../../store/sharesSlice";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { useDispatch } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import SharesItem from "../../components/sharesItem/SharesItem";
 import "../Home/styles.css";
@@ -41,8 +40,6 @@ const HomePage = () => {
       return setValues(reordedValues);
     }
   };
-
-  console.log(values.length);
 
   return (
     <div>

@@ -4,13 +4,18 @@ import "../sharesItem/styles.css";
 interface SharesItem {
   title: string;
   value?: string;
+  id?: string;
 }
 
-const SharesItem: FC<SharesItem> = ({ title, value }) => {
+const SharesItem: FC<SharesItem> = ({ title, value, id }) => {
   return (
     <div className="box">
-      <p>{title}</p>
-      <p>{value}</p>
+      <div style={{ width: "20px", backgroundColor: "red" }}>
+        <p className="numberTitle">{id}.</p>
+      </div>
+      <p>
+        {title}: {value}
+      </p>
     </div>
   );
 };
