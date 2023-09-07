@@ -9,14 +9,26 @@ interface SharesItem {
 
 const SharesItem: FC<SharesItem> = ({ title, value, id }) => {
   return (
-    <div className="box">
-      <div style={{ width: "20px", backgroundColor: "red" }}>
-        <p className="numberTitle">{id}.</p>
+    <>
+      <div className="box">
+        <div>
+          <p className="numberTitle">{id}.</p>
+        </div>
+        <div className="textBox">
+          <p>{title}</p>
+          <div className="colon">:</div>
+          <p className="text">{value}</p>
+        </div>
       </div>
-      <p>
-        {title}: {value}
-      </p>
-    </div>
+      <div
+        style={{
+          height: "1px",
+          width: "90%",
+          backgroundColor: "black",
+          marginLeft: "20px",
+        }}
+      ></div>
+    </>
   );
 };
 

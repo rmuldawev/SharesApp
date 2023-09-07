@@ -1,58 +1,57 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import {
+  createSlice,
+  createAsyncThunk,
+  createSelector,
+} from "@reduxjs/toolkit";
+import { baseService } from "./baseService";
 
-const token = 'pk_987404f82f2e4d039503ec72d0fdc68f'
-const baseService = axios.create({
-    baseURL: 'https://cloud.iexapis.com/stable/',
+const token = process.env.REACT_APP_API_TOKEN;
+
+export const getStocks = createAsyncThunk("ShareSlice/getStocks", async () => {
+  const response = await baseService.get(`stock/aapl/quote?token=${token}`);
+  const data = Object.entries(response.data);
+
+  const values = data.filter(
+    (e) => e.length > 0 && e[1] !== null && e[1] !== 0 && e[1] !== true
+  );
+
+  const arrayOfObjects = values.map(function (subArray) {
+    return {
+      name: subArray[0],
+      value: subArray[1],
+    };
   });
 
+  return arrayOfObjects;
+});
 
-  export const getShares = createAsyncThunk('ShareSlice/getShares', async () => {
-    const response = await baseService.get(`stock/aapl/quote?token=${token}`);
-    const data = Object.entries(response.data)
+interface ShareSliceState {
+  items: [] | any;
+  status: string;
+  error: any | null;
+}
 
-    const values = data.filter(
-      (e) => e.length > 0 && e[1] !== null 
-      && e[1] !== 0
-    );
-  
-    const arrayOfObjects = values.map(function (subArray) {
-      return {
-        name: subArray[0],
-        value: subArray[1],
-      };
-    });
-    return arrayOfObjects;
-    // return data
-  });
-
-  interface ShareSliceState {
-    items:  [] | any;
-    status: string;
-    error: any | null;
-  }
-
-  const initialState: ShareSliceState = {
-    items: [],
-    status: 'idle',
-    error: null,
-  };
+const initialState: ShareSliceState = {
+  items: [],
+  status: "idle",
+  error: null,
+};
 
 export const dataSlice = createSlice({
-  name: 'ShareSlice',
+  name: "ShareSlice",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getShares.pending, (state) => {
-        state.status = 'loading'; 
+      .addCase(getStocks.pending, (state) => {
+        state.status = "loading";
       })
-      .addCase(getShares.fulfilled, (state, action) => {
-        state.status = 'succeeded'; 
+      .addCase(getStocks.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.items = action.payload;
       })
-      .addCase(getShares.rejected, (state, action) => {
-        state.status = 'failed';
+      .addCase(getStocks.rejected, (state, action) => {
+        state.status = "failed";
         state.error = action.error.message;
       });
   },
@@ -60,4 +59,13 @@ export const dataSlice = createSlice({
 
 export default dataSlice.reducer;
 
-export const selectData = (state: RootState) => state.data.items
+export const selectData = (state: RootState) => state.data.items;
+
+export const selectObj = createSelector(selectData, (data) => {
+  const obj = data.reduce((acc: any, item: any) => {
+    acc[item.name] = item.value;
+    return acc;
+  }, {});
+
+  return obj;
+});

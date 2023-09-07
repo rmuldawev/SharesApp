@@ -1,5 +1,5 @@
 import React from "react";
-import StockTable from "./screens/Home/HomePageTest";
+import StockTable from "./screens/Home/StockTable";
 import PageHeader from "./components/PageHeader/PageHeader";
 
 const Main = () => {

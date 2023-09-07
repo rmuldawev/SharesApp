@@ -1,13 +1,18 @@
 .main {
-    /* background-color:bisque; */
+    background-color: #DAD7D6;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 50px 10px;
+    padding: 50px 30px;
     border: 1px solid lightgray;
+    border-radius: 0 10px 10px 0;
+    opacity: 0.9;
 
 }
 .nextPrevButtons {
+    /* position: fixed; */
+    /* bottom: 1; */
 }
 
 .buttonStyle {
@@ -15,4 +20,21 @@
     height: 50px;
     border-radius: 10px;
     border: 1px solid lightgray;
+}
+
+.container {
+    border: 2px solid #DAD7D6;
+    background-color: #ffffff;
+    border-radius: 20px 20px 20px 20px !important;
+    padding: 5px 5px 0 5px;
+    margin-bottom: 40px;
+}
+
+.textHeader {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.75rem;
+    font-weight: 700;
+    color: rgb(35 37 38/var(--tw-text-opacity));
+    font-size: 1.95rem;
+  margin-bottom: 60px;
 }

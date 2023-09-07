@@ -1,72 +1,29 @@
-import React, { FC, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../store";
-import { getShares, selectData } from "../../store/sharesSlice";
+import React from "react";
+import { useAppSelector } from "../../store";
+import { selectData, selectObj } from "../../store/sharesSlice";
 import "../PageHeader/styles.css";
+import { ItemProps } from "../../types/stocks";
 
 const PageHeader = () => {
   const datas = useAppSelector(selectData);
-  const dispatch = useAppDispatch();
-
-  const companyName = datas.filter(
-    (e: { name: string; value: string }) => e.name === "companyName"
-  );
-
-  const symbolCompany = datas.filter(
-    (e: { name: string }) => e.name === "symbol"
-  );
-
-  const nasdaq = datas.filter(
-    (e: { name: string }) => e.name === "primaryExchange"
-  );
-
-  const latestPice = datas.filter(
-    (e: { name: string }) => e.name === "latestPrice"
-  );
-
-  const change = datas.filter(
-    (e: { name: string; value: string }) => e.name === "change"
-  );
-
-  const changePercent = datas.filter(
-    (e: { name: string; value: string }) => e.name === "changePercent"
-  );
-
-  const previousVolume = datas.filter(
-    (e: { name: string; value: string }) => e.name === "previousVolume"
-  );
-
-  const iexOpen = datas.filter(
-    (e: { name: string; value: string }) => e.name === "iexOpen"
-  );
-
-  const dayYear = datas.filter(
-    (e: { name: string; value: string }) =>
-      e.name === "week52Low" || e.name === "week52High"
-  );
-
-  const peRatio = datas.filter(
-    (e: { name: string; value: string }) => e.name === "peRatio"
-  );
-
-  const marketCap = datas.filter(
-    (e: { name: string; value: string }) => e.name === "marketCap"
-  );
+  const obj = useAppSelector(selectObj);
+  const {
+    companyName,
+    symbol,
+    marketCap,
+    primaryExchange,
+    latestPrice,
+    change,
+    changePercent,
+    peRatio,
+    previousVolume,
+    iexOpen,
+    week52High,
+    week52Low,
+  } = obj;
 
   const formatLargeNumber = (number: number) => {
-    const suffixes = [
-      "",
-      "тыс.",
-      "млн",
-      "млрд",
-      "трлн",
-      "квадрлн",
-      "квинтиллион",
-      "секстиллион",
-      "септиллион",
-      "октиллион",
-      "нониллион",
-      "дециллион",
-    ];
+    const suffixes = ["", "тыс.", "млн", "млрд", "трлн", "квадрлн"];
 
     let magnitude = 0;
     while (Math.abs(number) >= 1000) {
@@ -77,27 +34,23 @@ const PageHeader = () => {
     return number.toFixed(2) + " " + suffixes[magnitude];
   };
 
-  console.log(dayYear, "dayYear");
-
   return (
     <div className="containerBox">
       <div className="headerContainer">
         <div className="titleCompany">
-          <p className="nameCompany">
-            {companyName.length > 0 && companyName[0].value}
-          </p>
-          <p className="nameCompany">
-            ({symbolCompany.length > 0 && symbolCompany[0].value})
-          </p>
+          <p className="nameCompany">{companyName && companyName}</p>
+          <p className="nameCompany">({symbol && symbol})</p>
         </div>
         <div className="nasdaqBox">
           <img
             src="https://i.pinimg.com/564x/ff/76/57/ff7657010677b3dbe75fe03c5de5a8d7.jpg"
             style={{ width: "25px", height: "17px" }}
           />
-          <p className="nasdaq">{nasdaq.length > 0 && nasdaq[0].value}</p>
+          <p className="nasdaq">{primaryExchange && primaryExchange}</p>
           <div style={{ flexDirection: "row", display: "flex" }}>
-            цена в <p style={{ fontWeight: "bold", marginLeft: "3px" }}>USD</p>
+            <p>цена в</p>
+
+            <p style={{ fontWeight: "bold", marginLeft: "3px" }}>USD</p>
           </div>
         </div>
       </div>
@@ -105,48 +58,46 @@ const PageHeader = () => {
       <div className="headerBox">
         <div className="changesContainer">
           <p className="latesPriceText">Курс закрытия:</p>
-          <p className="latestPrice">
-            {latestPice.length > 0 && latestPice[0].value}
-          </p>
+          <p className="latestPrice">{latestPrice && latestPrice.toFixed(2)}</p>
           <div
             className="changeBox"
             style={
-              change.length > 0 && change[0].value > 0
+              change && change > 0
                 ? { backgroundColor: "lightGreen" }
                 : { backgroundColor: "red" }
             }
           >
-            <p className="change">{change.length > 0 && change[0].value}</p>
-            <p>({changePercent.length > 0 && changePercent[0].value}%)</p>
+            <p className="change">{change && change}</p>
+            <p>({changePercent && changePercent.toFixed(2)}%)</p>
           </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
           <p>Объём:</p>
-          <p className="avgTotal">
-            {previousVolume.length > 0 && previousVolume[0].value}
-          </p>
+          <p className="avgTotal">{previousVolume && previousVolume}</p>
         </div>
         <div className="peRatio">
-          <p>Цена/прибыль :</p>
-          <p>{peRatio.length > 0 && peRatio[0].value}</p>
+          <p>Цена/прибыль:</p>
+          <p className="boldText">{peRatio && peRatio}</p>
         </div>
-        <div>
+        <div className="marketCap">
           <p>Рыночная копитализация: </p>
-          <p>
-            {marketCap.length > 0 &&
-              formatLargeNumber(Number(marketCap[0].value))}
+          <p className="boldText">
+            {marketCap && formatLargeNumber(Number(marketCap))}
           </p>
         </div>
         <div className="oneDay_oneYear">
-          <div className="oneDay">
-            Диапазон за день: {iexOpen.length > 0 && iexOpen[0].value} -{" "}
-            {latestPice.length > 0 && latestPice[0].value.toFixed(1)}
-          </div>
+          <p style={{ marginRight: "10px" }}>Диапазон за день:</p>
           <div className="oneYear">
-            <p>Диапазон за год:</p>
-            {dayYear.length > 0 && dayYear[1].value} -
-            {dayYear.length > 0 && dayYear[0].value}
+            <p className="text">{iexOpen && iexOpen}</p>
+            <div className="colon"> -</div>
+            <p className="text">{latestPrice && latestPrice.toFixed(1)}</p>
           </div>
+        </div>
+        <div className="oneYear">
+          <p>Диапазон за год:</p>
+          <p className="text">{week52Low && week52Low}</p>
+          <div className="colon">-</div>
+          <p className="text">{week52High && week52High}</p>
         </div>
       </div>
     </div>
