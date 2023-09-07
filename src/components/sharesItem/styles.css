@@ -2,7 +2,7 @@
   /* border-bottom: 1px solid lightgrey; */
   border-radius: 20px;
   display: flex;
-  width: 500px;
+  max-width: 600px;
   flex-direction: row;
   /* justify-content: space-between; */
   background-color: white;

@@ -7,9 +7,8 @@ import {
   Draggable,
   DropResult,
 } from "react-beautiful-dnd";
-import SharesItem from "../../components/sharesItem/SharesItem";
-import "../Home/styles.css";
-import PageHeader from "../../components/PageHeader/PageHeader";
+import SharesItem from "../sharesItem/SharesItem";
+import "../StockTable/styles.css";
 import { ItemProps } from "../../types/stocks";
 
 const StockTable = () => {
@@ -18,7 +17,6 @@ const StockTable = () => {
   const [values, setValues] = useState(stockData);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const itemsPerPage = 10;
-  // console.log("shares", stockData);
 
   useEffect(() => {
     setValues(stockData);
@@ -26,7 +24,7 @@ const StockTable = () => {
 
   useEffect(() => {
     dispatch(getStocks());
-  }, []);
+  }, [dispatch]);
 
   const handleDragDrop = (results: DropResult) => {
     const { source, destination, type } = results;

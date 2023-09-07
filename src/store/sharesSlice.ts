@@ -12,7 +12,7 @@ export const getStocks = createAsyncThunk("ShareSlice/getStocks", async () => {
   const data = Object.entries(response.data);
 
   const values = data.filter(
-    (e) => e.length > 0 && e[1] !== null && e[1] !== 0 && e[1] !== true
+    (e) => e.length > 0 && e[1] !== null && e[1] !== 0 && e[1] !== true && e[1] !== false
   );
 
   const arrayOfObjects = values.map(function (subArray) {
@@ -60,6 +60,7 @@ export const dataSlice = createSlice({
 export default dataSlice.reducer;
 
 export const selectData = (state: RootState) => state.data.items;
+export const selectStatus = (state: RootState) => state.data.status
 
 export const selectObj = createSelector(selectData, (data) => {
   const obj = data.reduce((acc: any, item: any) => {

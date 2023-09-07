@@ -2,7 +2,10 @@ import React from "react";
 import { useAppSelector } from "../../store";
 import { selectData, selectObj } from "../../store/sharesSlice";
 import "../PageHeader/styles.css";
-import { ItemProps } from "../../types/stocks";
+import ChartStocks from "../Chart/Chart";
+import InfoItem from "../common/InfoItem";
+import InfoTwoItem from "../common/InfoTwoItem";
+import LatestPrice from "../common/LatestPrice";
 
 const PageHeader = () => {
   const datas = useAppSelector(selectData);
@@ -56,48 +59,44 @@ const PageHeader = () => {
       </div>
       <div className="arrow"></div>
       <div className="headerBox">
-        <div className="changesContainer">
-          <p className="latesPriceText">Курс закрытия:</p>
-          <p className="latestPrice">{latestPrice && latestPrice.toFixed(2)}</p>
-          <div
-            className="changeBox"
-            style={
-              change && change > 0
-                ? { backgroundColor: "lightGreen" }
-                : { backgroundColor: "red" }
-            }
-          >
-            <p className="change">{change && change}</p>
-            <p>({changePercent && changePercent.toFixed(2)}%)</p>
-          </div>
-        </div>
-        <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
-          <p>Объём:</p>
-          <p className="avgTotal">{previousVolume && previousVolume}</p>
-        </div>
-        <div className="peRatio">
-          <p>Цена/прибыль:</p>
-          <p className="boldText">{peRatio && peRatio}</p>
-        </div>
-        <div className="marketCap">
-          <p>Рыночная копитализация: </p>
-          <p className="boldText">
-            {marketCap && formatLargeNumber(Number(marketCap))}
-          </p>
-        </div>
-        <div className="oneDay_oneYear">
-          <p style={{ marginRight: "10px" }}>Диапазон за день:</p>
-          <div className="oneYear">
-            <p className="text">{iexOpen && iexOpen}</p>
-            <div className="colon"> -</div>
-            <p className="text">{latestPrice && latestPrice.toFixed(1)}</p>
-          </div>
-        </div>
-        <div className="oneYear">
-          <p>Диапазон за год:</p>
-          <p className="text">{week52Low && week52Low}</p>
-          <div className="colon">-</div>
-          <p className="text">{week52High && week52High}</p>
+        <LatestPrice
+          latestPrice={latestPrice}
+          change={change}
+          changePercent={changePercent}
+        />
+        <InfoItem item={previousVolume} name="Объём:" />
+        <InfoItem item={peRatio} name="Цена/прибыль:" />
+        <InfoItem
+          item={formatLargeNumber(Number(marketCap))}
+          name="Рыночная копитализация:"
+        />
+        <InfoTwoItem min={iexOpen} max={latestPrice} name="Диапазон за день:" />
+        <InfoTwoItem min={week52Low} max={week52High} name="Диапазон за год:" />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <ChartStocks
+            startName="Начало дня"
+            endName="Конец дня"
+            max={latestPrice && Number(latestPrice.toFixed(0)) + 50}
+            min={100}
+            title="Диапазон цен акций за день"
+            start={iexOpen && iexOpen}
+            end={latestPrice && latestPrice.toFixed(2)}
+          />
+          <ChartStocks
+            startName="Начало года"
+            endName="Конец года"
+            max={week52High && Number(week52High.toFixed(0)) + 50}
+            min={100}
+            title="Диапазон цен акций за год"
+            start={week52Low && week52Low}
+            end={week52High && week52High}
+          />
         </div>
       </div>
     </div>

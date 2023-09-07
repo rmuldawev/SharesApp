@@ -36,15 +36,25 @@
   max-width: 1440px;
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
   justify-content: center;
   background-image: url('../../sharesapp//src/assets/images/photo_2023-09-01\ 15.16.42\ \(1\).jpg');
-  
   background-size: cover;
   overflow-y: hidden;
   background-color: #CFF1E9;
   padding: 20px 0 ;
 }
+
+@media (max-width:1140px) {
+  .mainContainer {
+  flex-direction: column;
+  align-items: center;
+  background-size:cover;
+  gap: 50px;
+
+  }
+}
+
+
 
 @keyframes App-logo-spin {
   from {
