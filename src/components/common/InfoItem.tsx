@@ -1,4 +1,6 @@
 import { FC } from "react";
+import React from "react";
+
 import "../common/styles.css";
 
 interface InfoItemProps {

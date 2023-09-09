@@ -1,14 +1,14 @@
 import React from "react";
 import { useAppSelector } from "../../store";
-import { selectData, selectObj } from "../../store/sharesSlice";
+import { selectObj } from "../../store/sharesSlice";
 import "../PageHeader/styles.css";
 import ChartStocks from "../Chart/Chart";
 import InfoItem from "../common/InfoItem";
 import InfoTwoItem from "../common/InfoTwoItem";
 import LatestPrice from "../common/LatestPrice";
+import CompanyNameTitle from "../common/CompanyNameTitle";
 
 const PageHeader = () => {
-  const datas = useAppSelector(selectData);
   const obj = useAppSelector(selectObj);
   const {
     companyName,
@@ -39,25 +39,12 @@ const PageHeader = () => {
 
   return (
     <div className="containerBox">
-      <div className="headerContainer">
-        <div className="titleCompany">
-          <p className="nameCompany">{companyName && companyName}</p>
-          <p className="nameCompany">({symbol && symbol})</p>
-        </div>
-        <div className="nasdaqBox">
-          <img
-            src="https://i.pinimg.com/564x/ff/76/57/ff7657010677b3dbe75fe03c5de5a8d7.jpg"
-            style={{ width: "25px", height: "17px" }}
-          />
-          <p className="nasdaq">{primaryExchange && primaryExchange}</p>
-          <div style={{ flexDirection: "row", display: "flex" }}>
-            <p>цена в</p>
-
-            <p style={{ fontWeight: "bold", marginLeft: "3px" }}>USD</p>
-          </div>
-        </div>
-      </div>
-      <div className="arrow"></div>
+      <CompanyNameTitle
+        companyName={companyName}
+        symbol={symbol}
+        primaryExchange={primaryExchange}
+      />
+      <div className="blackLine"></div>
       <div className="headerBox">
         <LatestPrice
           latestPrice={latestPrice}

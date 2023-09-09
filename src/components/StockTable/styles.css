@@ -1,14 +1,16 @@
 .main {
-  background-color: #dad7d6;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 50px 30px;
   border: 1px solid lightgray;
+background-color: #e9e9e9;
   border-radius: 0 10px 10px 0;
   opacity: 0.9;
  width: 500px;
+
 }
 
 .buttonStyle {
@@ -21,6 +23,7 @@
 .container {
   border: 2px solid #dad7d6;
   background-color: #ffffff;
+width: 400px;
   height: 620px;
   border-radius: 20px 20px 20px 20px !important;
   padding: 5px 5px 0 5px;
@@ -35,6 +38,21 @@
   font-size: 1.95rem;
   margin-bottom: 60px;
 }
+
+@media (max-width:1150px) {
+  .main {
+      background-color: #dad7d6;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 50px 30px;
+      border: 1px solid lightgray;
+      border-radius: 10px 10px 10px 10px;
+      opacity: 0.9;
+    }
+}
+
 
 @media (max-width:540px) {
     .main {

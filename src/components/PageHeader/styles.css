@@ -2,14 +2,13 @@
   margin: 0;
 }
 
-
 .headerContainer {
-    padding: 10px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 70px;
-    background-color: white;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 70px;
+  background-color: white;
 }
 
 .titleCompany {
@@ -18,8 +17,8 @@
 }
 
 .nasdaq {
-    font-size: .95rem;
-    font-weight: 400;
+  font-size: 0.95rem;
+  font-weight: 400;
 }
 
 .nasdaqBox {
@@ -31,53 +30,60 @@
 }
 
 .containerBox {
-    border: 1px solid lightgrey;
-    opacity: 0.9;
+  border: 1px solid lightgrey;
+  opacity: 0.9;
   max-width: 50%;
   display: flex;
   flex-direction: column;
-  padding: 20px 0 0 0 ;
+  padding: 20px 0 0 0;
   border-radius: 10px 0 0 10px;
   background-color: white;
   max-width: 560px;
 }
 
-@media (max-width: 540px) {
+@media (max-width: 1150px) {
   .containerBox {
-    border: 1px solid lightgrey;
-    opacity: 0.9;
-  /* display: flex;; */
-  /* flex-direction: column; */
-  padding: 20px 30px 0 0 ;
-  border-radius: 10px 10px 10px 10px;
-  width: 380px;
-  /* background-color: black; */
-  padding-left: 30px;
-
+    width: 500px;
   }
   .headerContainer {
     padding: 10px 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
 }
+
+@media (max-width: 540px) {
+  .containerBox {
+    border: 1px solid lightgrey;
+    opacity: 0.9;
+
+    padding: 20px 30px 0 0;
+    border-radius: 10px 10px 10px 10px;
+    width: 380px;
+    padding-left: 30px;
+  }
+  .headerContainer {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 .headerBox {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: space-between; */
-    /* height: 500px; */
-    background-color: white;
-    padding: 20px 20px 0px 20px;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px 20px 0px 20px;
+  gap: 20px;
 }
 
 .nameCompany {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.75rem;
   font-weight: 700;
-  color: rgb(35 37 38/var(--tw-text-opacity));
+  color: rgb(35 37 38 / var(--tw-text-opacity));
   font-size: 1.95rem;
 }
 
@@ -91,56 +97,50 @@
 }
 
 .changesContainer {
-    display: flex;
-    flex-direction: row;
-    max-width: 400px;
-    gap: 20px;
-    align-items: center;
-
+  display: flex;
+  flex-direction: row;
+  max-width: 400px;
+  gap: 20px;
+  align-items: center;
 }
-
-
 
 .change {
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5rem;
 }
 
-.arrow {
-    height: 2px;
-    width: 100%;
-    background-color: black;
+.blackLine {
+  height: 2px;
+  width: 100%;
+  background-color: black;
 }
 .avgTotal {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .oneYear {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
   gap: 10;
-
 }
 
 .oneDay_oneYear {
-    display: flex;
-    flex-direction: row;
-    width: 500px;
-    /* background-color: yellow; */
+  display: flex;
+  flex-direction: row;
+  width: 500px;
 }
 
-.peRatio{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
+.peRatio {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
 .boldText {
   font-size: 1rem;
   font-weight: 700;
-
 }
 
 .oneDay {
@@ -149,7 +149,7 @@
 }
 
 .marketCap {
-  display:flex;
+  display: flex;
   gap: 10;
   flex-direction: row;
 }

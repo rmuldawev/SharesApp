@@ -1,49 +1,48 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import StockTable from '../components/StockTable/StockTable';
-// import StockTable from './StockTable';
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import StockTable from "../components/StockTable/StockTable.tsx";
 
-// Поддельные данные для вашего селектора
-const mockSelectData = [
-  {name: LatestPrice, value: 100}
-];
+test("renders StockTable component with pagination", () => {
+  // Мокируем функции и хуки
+  jest.mock("../../store/sharesSlice", () => ({
+    __esModule: true,
+    getStocks: jest.fn(),
+    selectData: jest.fn(() => mockData),
+    selectObj: jest.fn(),
+  }));
 
-// Поддельная функция useDispatch
-const mockDispatch = jest.fn();
+  // Мокируем данные, которые вернет useAppSelector
+  const mockData = [
+    { name: "CompanyName", value: "Google" },
+    { name: "CompanyName", value: "Microsoft" },
+    { name: "CompanyName", value: "Amazon" },
+  ];
 
-// Мокаем хуки из react-redux
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useDispatch: jest.fn(),
-}));
+  // Рендерим компонент
+  const { getByText } = render(<StockTable />);
 
-// Мокаем селектор и действие из Redux
-jest.mock("/../store/sharesSlice.ts", () => ({
-  ...jest.requireActual('../../store/sharesSlice'),
-  selectData: jest.fn(),
-  getStocks: jest.fn(),
-}));
-
-
-
-describe('StockTable', () => {
-  beforeAll(() => {
-    // Устанавливаем поведение моков перед началом тестов
-    selectData.mockReturnValue(mockSelectData);
-    useDispatch.mockReturnValue(mockDispatch);
+  // Проверяем, что компонент корректно отображает данные
+  mockData.forEach((item) => {
+    const itemName = getByText(item.name);
+    expect(itemName).toBeInTheDocument();
   });
 
-  it('отображает компонент StockTable', () => {
-    render(<StockTable />);
-    const stockTableElement = screen.getByText('Полный отчет'); // Подстройте этот селектор по необходимости
-    expect(stockTableElement).toBeInTheDocument();
-  });
+  // Проверяем работу кнопок пагинации
+  const prevButton = getByText("Prev");
+  const nextButton = getByText("Next");
 
-  // Добавьте здесь другие тесты, чтобы проверить разное поведение компонента
+  // Проверяем, что кнопка Prev заблокирована на первой странице
+  expect(prevButton).toBeDisabled();
 
-  afterEach(() => {
-    // Очищаем моки после каждого теста
-    jest.clearAllMocks();
-  });
+  // Симулируем нажатие на кнопку Next
+  fireEvent.click(nextButton);
+
+  // Теперь кнопка Prev должна быть активной
+  expect(prevButton).not.toBeDisabled();
+
+  // Симулируем нажатие на кнопку Prev
+  fireEvent.click(prevButton);
+
+  // После нажатия на Prev снова кнопка Prev должна быть заблокирована
+  expect(prevButton).toBeDisabled();
 });
