@@ -1,6 +1,6 @@
 module.exports = {
   // Другие настройки Jest
-
+  testEnvironment: 'jsdom',
   // Добавьте преобразование TypeScript с помощью ts-jest
   transform: {
     "^.+\\.tsx?$": "ts-jest",

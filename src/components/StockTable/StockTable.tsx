@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { getStocks, selectData, selectObj } from "../../store/sharesSlice";
-import { useAppDispatch, useAppSelector } from "../../store";
 import {
   DragDropContext,
   Droppable,
   Draggable,
   DropResult,
 } from "react-beautiful-dnd";
-import SharesItem from "../sharesItem/SharesItem";
-import "../StockTable/styles.css";
+//types
 import { ItemProps } from "../../types/stocks";
+
+//conponents
+import SharesItem from "../sharesItem/SharesItem";
+
+//redux
+import { useAppDispatch, useAppSelector } from "../../store";
+import { getStocks, selectData } from "../../store/sharesSlice";
+
+//styles
+import "../StockTable/styles.css";
 
 const StockTable = () => {
   const dispatch = useAppDispatch();

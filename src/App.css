@@ -37,7 +37,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-image: url("https://pixabay.com/get/ge87e34a6f05181d0639274d128be6b9917b30cc635c70f72505fe2ffb13f3cd41d439dfd76eb40af6e69d0b89b642b16.jpg");
+  background-image: url('../src/assets/images/background.jpg');
   background-size: cover;
   overflow-y: hidden;
   background-color: #cff1e9;
